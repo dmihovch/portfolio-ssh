@@ -6,6 +6,7 @@
 void rain(int startx)
 {
 	int maxy = getmaxy(stdscr);
+	int maxx = getmaxx(stdscr);
 	char chs[CHARS] = {'&', '$', '@', '|', '%'};
 
 	for(int i = 0; i<maxy; i++){
@@ -16,8 +17,9 @@ void rain(int startx)
 		} else {
 			startx = startx - 1;
 		}
+		clampx(&startx, maxx);
 		mvaddch(i, startx, ch);
-		refresh();
+		boxRefresh(stdscr);
 		usleep(10000);
 	}
 }
