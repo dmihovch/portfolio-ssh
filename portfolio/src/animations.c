@@ -5,11 +5,11 @@
 
 void rain(int startx)
 {
-	int maxy = getmaxy(stdscr);
-	int maxx = getmaxx(stdscr);
+	int maxy = getmaxy(stdscr)-1;
+	int maxx = getmaxx(stdscr)-1;
 	char chs[CHARS] = {'&', '$', '@', '|', '%'};
 
-	for(int i = 0; i<maxy; i++){
+	for(int i = 1; i<maxy; i++){
 
 		char ch = chs[rand()%CHARS];
 		if(rand()%2){
@@ -19,7 +19,6 @@ void rain(int startx)
 		}
 		clampx(&startx, maxx);
 		mvaddch(i, startx, ch);
-		boxRefresh(stdscr);
 		usleep(10000);
 	}
 }
