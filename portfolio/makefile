@@ -1,8 +1,8 @@
 all:
-	gcc -o portfolio main.c src/animations.c src/utils.c -lncurses -pthread
+	gcc -o bin/portfolio main.c src/animations.c src/utils.c -lncurses 
 
-run: portfolio
-	./portfolio
+run: bin/portfolio
+	./bin/portfolio
 
 clean:
-	rm portfolio
+	rm bin/portfolio

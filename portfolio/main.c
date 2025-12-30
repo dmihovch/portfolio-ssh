@@ -1,50 +1,46 @@
 #include "include/animations.h"
 #include "include/utils.h"
-
-#include <pthread.h>
-#define REFRESH_RATE 16667
+#include <string.h>
 
 
-typedef struct {
-	int running;
-}State;
-
-void* refreshThread(void* payload){
-	State* state = payload;
-	while(state->running){
-		wrefresh(stdscr);
-		usleep(REFRESH_RATE);
-	}
-	return NULL;	
-}
-
-
+#define NUMBOLTS 5
 
 int main(int argc, char* argv[]){
-
-
-
-
 	initCurses();
-
-	pthread_t refresher;
-
-	State* state = (State*)malloc(sizeof(State));
-	state->running = 1;
-	pthread_create(&refresher, NULL, refreshThread,state);
-
-	mvprintw(10,10,"Hello world");
-	refresh();
-	rain(10);
-	rain(30);
-	rain(50);
-	getch();
-
-
+	int miny = 1;
+	int minx = 1;
+	int maxy = getmaxy(stdscr)-2;
+	int maxx = getmaxx(stdscr)-2;
+	Lightning bolts[NUMBOLTS];
+	for(int i = 0; i<NUMBOLTS; i++){
+		bolts[i] = createLightning(10+i*20);
+	}
 	
-	 pthread_join(refresher,NULL);
-	
-	 free(state);
+
+
+
+		const char* msg = "Daniel Mihovch";
+		int len = strlen(msg);
+		CycleLetter* str = createCycleString(msg, len, 10, 10, 100);
+		if(str == NULL) return 1;
+
+	while(1 ){
+		char ch = getch();
+		if(ch == 'q') break;
+
+
+		for(int i = 0; i<NUMBOLTS; i++){
+		 	if(bolts[i].y < maxy) updateLightning(&bolts[i], maxy,maxx );
+		}
+		
+		updateCycleString(str, len);
+
+
+		refresh();
+		usleep(50000);
+	}
+
+	free(str);
 
 	closeCurses();
 	return 0;

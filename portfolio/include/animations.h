@@ -3,7 +3,23 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+
+#define HIGHASCII 126
+#define LOWASCII 33
+
+
+typedef struct {
+	int x,y,cycles;
+	char ch;
+}CycleLetter;
+
+CycleLetter* createCycleString(const char* str, int len,  int x, int y, int cycles);
+void updateCycleString(CycleLetter* str, int len);
+
+
 #define CHARS 5
-
-
-void rain(int);
+typedef struct{
+	int x,y;
+}Lightning;
+Lightning createLightning(int);
+void updateLightning(Lightning*, int, int);

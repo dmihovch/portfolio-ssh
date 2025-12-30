@@ -6,8 +6,7 @@
 
 
 
-void clampx(int*, int);
-void clampy(int*, int);
+int clamp(int, int);
 void initCurses();
 void closeCurses();
 

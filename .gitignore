@@ -1,7 +1,11 @@
 
+bin
+bin/*
 
 
-portfolio/portfolio
+**/.DS_Store
+
+
 # Prerequisites
 *.d
 
