@@ -1,4 +1,8 @@
-#pragma once
+
+#ifndef ANIMATION_H
+#define ANIMATION_H
+
+
 #include "utils.h"
 #include <stdlib.h>
 #include <unistd.h>
@@ -22,4 +26,6 @@ typedef struct{
 	int x,y;
 }Lightning;
 Lightning createLightning(int);
-void updateLightning(Lightning*, int, int);
+void updateLightning(WINDOW* win, Lightning*, int, int);
+
+#endif 

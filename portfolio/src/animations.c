@@ -6,7 +6,7 @@ Lightning createLightning(int x){
 }
 
 
-void updateLightning(Lightning* bolt, int maxy, int maxx)
+void updateLightning(WINDOW* win, Lightning* bolt, int maxy, int maxx)
 {
 	char chs[CHARS] = {'&', '$', '@', '|', '%'};
 	char ch = chs[rand()%CHARS];
@@ -18,7 +18,7 @@ void updateLightning(Lightning* bolt, int maxy, int maxx)
 	bolt->y++;
 	bolt->x = clamp(bolt->x, maxx);
 	bolt->y = clamp(bolt->y, maxy);
-	mvaddch(bolt->y, bolt->x, ch);
+	mvwaddch(win, bolt->y, bolt->x, ch);
 }
 
 
