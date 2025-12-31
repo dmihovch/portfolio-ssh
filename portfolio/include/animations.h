@@ -23,9 +23,16 @@ void updateCycleString(CycleLetter* str, int len);
 
 #define CHARS 5
 typedef struct{
-	int x,y;
+	int x,y, startx, starty;
 }Lightning;
-Lightning createLightning(int);
+
+
+Lightning createLightning(int startx, int starty);
 void updateLightning(WINDOW* win, Lightning*, int, int);
+void updateAllLightning(WINDOW* win, Lightning* bolts, int num_bolts, int maxy, int maxx);
+void resetLightning(WINDOW* win, Lightning* bolts, int num_bolts);
+
+
+
 
 #endif 

@@ -5,7 +5,6 @@ int clamp(int i, int maxi){
 	if(i>maxi)return maxi;
 	return i;
 }
-int randInRange(int,int);
 
 void initCurses(){
 	initscr();

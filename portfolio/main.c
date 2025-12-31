@@ -2,6 +2,8 @@
 #include <string.h>
 #include <panel.h>
 #include "include/page.h"
+#include "include/utils.h"
+#include "logs/logs.h"
 
 #define NUMBOLTS 5
 
@@ -10,16 +12,24 @@
 
 int main(int argc, char* argv[]){
 	initCurses();
+	debug_init();
 	
-	int miny = 1;
-	int minx = 1;
+
+
+
+	int miny = 0;
+	int minx = 0;
 	int maxy = getmaxy(stdscr)-2;
 	int maxx = getmaxx(stdscr)-2;
 
+	debug_logf("MAX X %d\nMAX Y %d\n",maxx,maxy);
+	
 
-	Lightning bolts[NUMBOLTS];
+	Lightning* bolts = malloc(NUMBOLTS*sizeof(Lightning));
+	if(bolts == NULL)return 1;
+
 	for(int i = 0; i<NUMBOLTS; i++){
-		bolts[i] = createLightning(10+i*20);
+		bolts[i] = createLightning(10+i*20, miny);
 	}
 
 	const char* msg = "Daniel Mihovch";
@@ -59,6 +69,8 @@ int main(int argc, char* argv[]){
 	top_panel(home.pan);
 	int current_page_idx;
 	Page* current_page = &pages[0];
+
+
 	while(1){
 		char ch = getch();
 		if(ch == 'q') break;
@@ -72,46 +84,21 @@ int main(int argc, char* argv[]){
 		}
 		if(ch == '3'){
 			top_panel(animations.pan);
+			resetLightning(animations.win, bolts, NUMBOLTS);
+			box(animations.win, 0,0);
 			current_page = &pages[2];
 		}
 
 		//updatePage(current_page, current_page.function); create a field in Page to store a function pointer
-		for(int i = 0; i<NUMBOLTS; i++){
-			if(bolts[i].y < maxy)
-				updateLightning(animations.win,&bolts[i],maxy,maxx);
-		}
-		
-
-
-
+	
+		updateAllLightning(animations.win, bolts, NUMBOLTS, maxy, maxx);
 
 		update_panels();
 		doupdate();
-
-
-
-
-
-
-
-
-
-
-
-
-
-		//
-		// for(int i = 0; i<NUMBOLTS; i++){
-		// 	if(bolts[i].y < maxy) updateLightning(&bolts[i], maxy,maxx );
-		// }
-		//
-		// updateCycleString(str, len);
-		
-	
 		usleep(50000);
-
 	}
 
+	debug_close();
 	closeCurses();
 	return 0;
 }

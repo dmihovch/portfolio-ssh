@@ -1,8 +1,7 @@
 #include "../include/animations.h"
 #include <stdlib.h>
-
-Lightning createLightning(int x){
-	return (Lightning){ .x = x, .y = 0};
+Lightning createLightning(int startx, int starty){
+	return (Lightning){ .x = startx, .y = starty, .startx = startx, .starty = starty};
 }
 
 
@@ -19,6 +18,22 @@ void updateLightning(WINDOW* win, Lightning* bolt, int maxy, int maxx)
 	bolt->x = clamp(bolt->x, maxx);
 	bolt->y = clamp(bolt->y, maxy);
 	mvwaddch(win, bolt->y, bolt->x, ch);
+}
+
+void updateAllLightning(WINDOW* win, Lightning* bolts, int num_bolts, int maxy, int maxx){
+	for(int i  = 0; i<num_bolts; i++){
+		if(bolts[i].y < maxy){
+		updateLightning(win,&bolts[i], maxy, maxx);
+		}
+	}
+}
+
+void resetLightning(WINDOW* win, Lightning* bolts, int num_bolts){
+	wclear(win);
+	for(int i = 0; i<num_bolts; i++){
+		bolts[i].x = bolts[i].startx;
+		bolts[i].y = bolts[i].starty;
+	}
 }
 
 
