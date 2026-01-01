@@ -56,12 +56,12 @@ int main(int argc, char* argv[]){
 
 	const char* home_msg = "Welcome to the Home Page";
 	int home_len = strlen(home_msg);
-	mvwprintw(home.win, 0,(maxx/2) - (home_len/2),home_msg);
+	mvwprintw(home.win, 0,(maxx/2) - (home_len/2),"%s",home_msg);
 
 
 	const char* resume_msg = "Welcome to the Resume Page";
 	int resume_len = strlen(resume_msg);
-	mvwprintw(resume.win, 0,(maxx/2) - (resume_len/2), resume_msg);
+	mvwprintw(resume.win, 0,(maxx/2) - (resume_len/2),"%s", resume_msg);
 
 
 	Page pages[3] = {home,resume,animations};
