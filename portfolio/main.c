@@ -1,4 +1,5 @@
 #include "include/animations.h"
+#include <ncurses.h>
 #include <string.h>
 #include <panel.h>
 #include "include/page.h"
@@ -6,7 +7,6 @@
 #include "logs/logs.h"
 
 #define NUMBOLTS 5
-
 
 
 
@@ -25,6 +25,7 @@ int main(int argc, char* argv[]){
 	int maxy = getmaxy(stdscr)-2;
 	int maxx = getmaxx(stdscr)-2;
 
+	debug_logf("NEW RUN OF PROGRAM\n");
 	debug_logf("MAX X %d\nMAX Y %d\n",maxx,maxy);
 	
 
@@ -42,17 +43,24 @@ int main(int argc, char* argv[]){
 
 
 	Page home;  
-	home.win = newwin(0, 0, 0,0);
+	home.win = newwin(0,0,0,0);
 	home.pan = new_panel(home.win);
+	keypad(home.win, TRUE);
+	nodelay(home.win, TRUE);
+
 
 	Page resume; 
 	resume.win = newwin(0,0,0,0);
 	resume.pan = new_panel(resume.win);
+	keypad(resume.win, TRUE);
+	nodelay(resume.win, TRUE);
 
 	Page animations; 
 	animations.win = newwin(0,0,0,0);
 	animations.pan = new_panel(animations.win);
-	
+	keypad(animations.win,TRUE);
+	nodelay(animations.win, TRUE);
+
 	box(home.win, 0, 0);
 	box(resume.win,0,0);
 	box(animations.win,0,0);
@@ -87,10 +95,15 @@ int main(int argc, char* argv[]){
 
 
 
-		char ch = getch();
+		char ch = wgetch(current_page->win);
+		debug_logf("%c\n",ch);
 		if(ch == 'q') break;
+		if(ch == (char)KEY_RESIZE) {
+			handleResize(pages, 3);
+			debug_logf("in key resize\n");
+		}
 		if(ch == '1'){
-			top_panel(home.pan);
+top_panel(home.pan);
 			current_page = &pages[0];
 		} 
 		if(ch == '2'){
