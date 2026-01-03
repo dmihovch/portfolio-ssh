@@ -15,7 +15,10 @@ int main(int argc, char* argv[]){
 	debug_init();
 	
 
-
+	int x_termsize;
+	int y_termsize;
+	int x_new_termsize;
+	int y_new_termsize;
 
 	int miny = 0;
 	int minx = 0;
@@ -34,7 +37,7 @@ int main(int argc, char* argv[]){
 
 	const char* msg = "Daniel Mihovch";
 	int len = strlen(msg);
-	CycleLetter* str = createCycleString(msg, len, 10, 10, 10);
+	CycleLetter* str = createCycleString(msg, len, 10, 10,10);
 	if(str == NULL) return 1;
 
 
@@ -70,8 +73,20 @@ int main(int argc, char* argv[]){
 	int current_page_idx;
 	Page* current_page = &pages[0];
 
-
+	getmaxyx(current_page->win,y_termsize, x_termsize);
+	
 	while(1){
+
+		getmaxyx(current_page->win,y_new_termsize,x_new_termsize);
+		if(x_new_termsize != x_termsize || y_new_termsize != y_termsize){
+			debug_logf("y: %d x: %d\n", y_new_termsize,x_new_termsize);
+			x_termsize = x_new_termsize;
+			y_termsize = y_new_termsize;
+		}
+
+
+
+
 		char ch = getch();
 		if(ch == 'q') break;
 		if(ch == '1'){
