@@ -1,9 +1,9 @@
 all:
-	gcc -o bin/portfolio main.c src/animations.c src/utils.c src/page.c -lpanel -lncurses 
-
-
-debug:
 	gcc -o bin/portfolio main.c src/animations.c src/utils.c src/page.c logs/logs.c -lpanel -lncurses
+
+
+nodebug:
+	gcc -o bin/portfolio main.c src/animations.c src/utils.c src/page.c -lpanel -lncurses 
 
 run: bin/portfolio
 	./bin/portfolio

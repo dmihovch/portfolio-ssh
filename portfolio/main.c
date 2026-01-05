@@ -6,8 +6,8 @@
 #include "include/utils.h"
 #include "logs/logs.h"
 
-#define NUMBOLTS 5
 
+#define NUMBOLTS 5
 
 
 int main(int argc, char* argv[]){
@@ -96,14 +96,17 @@ int main(int argc, char* argv[]){
 
 
 		char ch = wgetch(current_page->win);
-		debug_logf("%c\n",ch);
+		if(ch != ERR){
+			debug_logf("%c\n",ch);
+		}
 		if(ch == 'q') break;
 		if(ch == (char)KEY_RESIZE) {
+			//handleResize will handle everything that needs to be done before next loop iteration
 			handleResize(pages, 3);
-			debug_logf("in key resize\n");
+			continue;
 		}
 		if(ch == '1'){
-top_panel(home.pan);
+			top_panel(home.pan);
 			current_page = &pages[0];
 		} 
 		if(ch == '2'){

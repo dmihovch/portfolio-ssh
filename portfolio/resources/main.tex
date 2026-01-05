@@ -1,0 +1,136 @@
+\documentclass[11pt,a4paper]{article}
+
+%------------------PACKAGES------------------
+\usepackage[margin=0.5in]{geometry}  % Smaller margins for more content
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+%------------------SECTION FORMATTING------------------
+% Added a horizontal rule (line) after each section header
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+%------------------CUSTOM COMMANDS------------------
+% Command for Education/Experience headers with right-aligned dates
+\newcommand{\resumeHeading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small\textbf{#1} & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in, labelsep=5pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+\newcommand{\resumeItem}[1]{\item\small{#1 \vspace{-2pt}}}
+
+\begin{document}
+
+%-----------HEADER-----------
+\begin{center}
+    {\Huge \scshape Daniel Mihovch} \\ \vspace{5pt}
+    \small 732-239-5689 $|$ 
+    \href{mailto:dmihovch@udel.edu}{dmihovch@udel.edu} $|$ 
+    \href{https://linkedin.com/in/danielmihovch}{linkedin.com/in/danielmihovch} $|$ 
+    \href{https://github.com/dmihovch}{github.com/dmihovch}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+\begin{itemize}[leftmargin=0.15in, label={}]
+    \resumeHeading
+      {University of Delaware}{Newark, DE}
+      {Bachelor of Science in Computer Science, conc. Systems \& Networks}{Aug. 2023 -- May 2027 (Expected)}
+\end{itemize}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+\begin{itemize}[leftmargin=0.15in, label={}]
+
+    \resumeHeading
+      {Four Youth Productions}{Wilmington, DE}
+      {Studio Operations Assistant \& System Administrator}{June 2025 -- Present}
+      \resumeItemListStart
+        \resumeItem{Maintained studio electronic systems: security system, NAS system, multiple Apple desktop systems}
+        \resumeItem{Planned and prepared lessons for over 300 students across 4 schools}
+        \resumeItem{Managed multiple community events to showcase student work}
+      \resumeItemListEnd
+
+    \resumeHeading
+      {Four Youth Productions}{Wilmington, DE}
+      {STEM Instructor}{Feb. 2025 -- Present}
+      \resumeItemListStart
+        \resumeItem{Designed \& led engaging after-school STEM lessons for underrepresented youth in Wilmington, DE public schools.}
+        \resumeItem{Focused lessons teaching foundational environmental science, biology, physics, computer science and chemistry.}
+        \resumeItem{Taught students from grades Pre-K -- 8th}
+      \resumeItemListEnd
+
+    \resumeHeading
+      {University of Delaware CIS}{Newark, DE}
+      {Computer Architecture \& Systems Programming Teaching Assistant}{Jan. 2025 -- Present}
+      \resumeItemListStart
+        \resumeItem{TA for CISC210: Introduction to Systems Programming, CISC260: Computer Architecture \& Assembly Language}
+\resumeItem{Assisted in teaching students the C programming language, ARMv8 assembly, Bash, Unix systems, and interacting with hardware from software via Raspberry Pi}
+        \resumeItem{Assisted with lecture, held office hours, graded assignments}
+        
+      \resumeItemListEnd
+      \resumeHeading
+      {University of Delaware CIS}{Newark, DE}
+      {Introduction To Programming Teaching Assistant}{Jan. 2025 -- Present}
+      \resumeItemListStart
+        \resumeItem{TA for CISC106: General Computer Science for Engineers}
+        \resumeItem{Led a weekly practicum session for 25+ students, consisting of a mini-lecture and activity, teaching the fundamentals of computer science with the Python programming language}
+        \resumeItem{Held office hours, graded assignments}
+      \resumeItemListEnd
+
+\end{itemize}
+
+%-----------PROJECTS-----------
+\section{Projects}
+\begin{itemize}[leftmargin=0.15in, label={}]
+    
+    \resumeProjectHeading
+      {\textbf{Piemulator} $|$ \emph{C, ASM, Bash, Raspberry Pi}}{November 2025  -- Present}
+      \resumeItemListStart
+        \resumeItem{Created a Hardware Abstraction Layer that serves as a drop-in replacement for the University of Delaware's libsense Raspberry Pi Sense Hat library}
+\resumeItem{Focused on portability and ease of use, currently only depends on pthreads. Earlier versions also depended on ncurses, but this has since been simplified to ANSI escape codes}
+        \resumeItem{Students can test and develop projects without always needing access to the physical Raspberry Pi, simply needed to link against my libpie instead of the provided libsense}
+      \resumeItemListEnd
+
+    \resumeProjectHeading
+      {\textbf{16 bit Virtual Machine} $|$ \emph{C}}{August 2025 -- Present}
+      \resumeItemListStart
+        \resumeItem{Single tasking, 16 bit toy virtual machine written in C}
+
+        \resumeItem{Implemented my own risc-style ISA featuring a segmented memory model and multiple addressing modes}
+\resumeItem{Currently writing a companion assembler to avoid having to write raw bytecode programs}
+      \resumeItemListEnd
+
+\end{itemize}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: C, Go, Bash, Python, Typescript/HTML/CSS} \\
+     \textbf{Operating Systems}{: Linux, OSX, Windows} \\
+     \textbf{Frameworks/Libraries}{: CUDA, SDL, ncurses, React/Svelte} \\
+    }}
+ \end{itemize}
+
+\end{document}

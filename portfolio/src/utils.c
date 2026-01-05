@@ -22,9 +22,28 @@ void closeCurses(){
 }
 
 void handleResize(Page* pages, int num_pages){
-
+	WINDOW* curwin;
 	for(int i = 0; i<num_pages; i++){
-		box(pages[i].win,0,0);
+		curwin = pages[i].win;
+		wclear(curwin);
+		box(curwin,0,0);
+		
 	}
+	
+	// fullRedrawHome()
+	// fullRedrawResume()
+	// fullRedrawLightning();
+	//
+
 }
+
+
+
+
+
+
+
+
+
+
 
