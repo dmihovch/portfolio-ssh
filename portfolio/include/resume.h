@@ -2,14 +2,9 @@
 #define RESUME_H
 
 
-
+#include "../logs/logs.h"
 #include "page.h"
-
-typedef struct {
-	Page term;
-
-}Resume;
-
+void redrawResume(Page* resume);
 
 
 

@@ -30,6 +30,7 @@ void handleResize(Page* pages, int num_pages){
 		
 	}
 	
+	redrawResume(&pages[1]);
 	// fullRedrawHome()
 	// fullRedrawResume()
 	// fullRedrawLightning();

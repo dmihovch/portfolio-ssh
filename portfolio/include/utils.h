@@ -5,6 +5,7 @@
 
 #include "page.h"
 #include <ncurses.h>
+#include "resume.h"
 
 
 void handleResize(Page* pages, int num_pages);

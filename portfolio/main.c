@@ -3,6 +3,7 @@
 #include <string.h>
 #include <panel.h>
 #include "include/page.h"
+#include "include/resume.h"
 #include "include/utils.h"
 #include "logs/logs.h"
 
@@ -83,8 +84,8 @@ int main(int argc, char* argv[]){
 
 	getmaxyx(current_page->win,y_termsize, x_termsize);
 	
+	char curch = '1';
 	while(1){
-
 		getmaxyx(current_page->win,y_new_termsize,x_new_termsize);
 		if(x_new_termsize != x_termsize || y_new_termsize != y_termsize){
 			debug_logf("y: %d x: %d\n", y_new_termsize,x_new_termsize);
@@ -105,24 +106,28 @@ int main(int argc, char* argv[]){
 			handleResize(pages, 3);
 			continue;
 		}
-		if(ch == '1'){
+		if(ch == '1' && ch != curch){
+			curch = ch;
 			top_panel(home.pan);
 			current_page = &pages[0];
 		} 
-		if(ch == '2'){
+		if(ch == '2' && ch != curch){
+			curch = ch;
 			top_panel(resume.pan);
 			current_page = &pages[1];
 		}
-		if(ch == '3'){
+		if(ch == '3' && ch != curch){
+			curch = ch;
 			top_panel(animations.pan);
 			resetLightning(animations.win, bolts, NUMBOLTS);
 			box(animations.win, 0,0);
 			current_page = &pages[2];
 		}
 
-		//updatePage(current_page, current_page.function); create a field in Page to store a function pointer
 	
 		updateAllLightning(animations.win, bolts, NUMBOLTS, maxy, maxx);
+
+
 
 		update_panels();
 		doupdate();
