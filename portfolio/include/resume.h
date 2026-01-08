@@ -4,6 +4,7 @@
 
 #include "../logs/logs.h"
 #include "page.h"
+#include <string.h>
 void redrawResume(Page* resume);
 
 

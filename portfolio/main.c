@@ -26,8 +26,8 @@ int main(int argc, char* argv[]){
 	int maxy = getmaxy(stdscr)-2;
 	int maxx = getmaxx(stdscr)-2;
 
-	debug_logf("NEW RUN OF PROGRAM\n");
-	debug_logf("MAX X %d\nMAX Y %d\n",maxx,maxy);
+	printl("NEW RUN OF PROGRAM\n");
+	printl("MAX X %d\nMAX Y %d\n",maxx,maxy);
 	
 
 	Lightning* bolts = malloc(NUMBOLTS*sizeof(Lightning));
@@ -71,11 +71,6 @@ int main(int argc, char* argv[]){
 	mvwprintw(home.win, 0,(maxx/2) - (home_len/2),"%s",home_msg);
 
 
-	const char* resume_msg = "Welcome to the Resume Page";
-	int resume_len = strlen(resume_msg);
-	mvwprintw(resume.win, 0,(maxx/2) - (resume_len/2),"%s", resume_msg);
-
-
 	Page pages[3] = {home,resume,animations};
 		
 	top_panel(home.pan);
@@ -88,7 +83,7 @@ int main(int argc, char* argv[]){
 	while(1){
 		getmaxyx(current_page->win,y_new_termsize,x_new_termsize);
 		if(x_new_termsize != x_termsize || y_new_termsize != y_termsize){
-			debug_logf("y: %d x: %d\n", y_new_termsize,x_new_termsize);
+			printl("y: %d x: %d\n", y_new_termsize,x_new_termsize);
 			x_termsize = x_new_termsize;
 			y_termsize = y_new_termsize;
 		}
@@ -98,7 +93,7 @@ int main(int argc, char* argv[]){
 
 		char ch = wgetch(current_page->win);
 		if(ch != ERR){
-			debug_logf("%c\n",ch);
+			printl("%c\n",ch);
 		}
 		if(ch == 'q') break;
 		if(ch == (char)KEY_RESIZE) {
@@ -115,6 +110,7 @@ int main(int argc, char* argv[]){
 			curch = ch;
 			top_panel(resume.pan);
 			current_page = &pages[1];
+			redrawResume(&resume);
 		}
 		if(ch == '3' && ch != curch){
 			curch = ch;
@@ -124,7 +120,6 @@ int main(int argc, char* argv[]){
 			current_page = &pages[2];
 		}
 
-	
 		updateAllLightning(animations.win, bolts, NUMBOLTS, maxy, maxx);
 
 

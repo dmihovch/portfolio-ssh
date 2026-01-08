@@ -3,7 +3,7 @@
 static FILE* logfile = NULL;
 
 
-void debug_logf(const char *fmt, ...){
+void printl(const char *fmt, ...){
 	va_list args;
 	va_start(args, fmt);
 	vfprintf(logfile,fmt,args);

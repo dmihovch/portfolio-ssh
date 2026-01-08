@@ -1,6 +1,10 @@
 #include "../include/utils.h"
 #include <ncurses.h>
 
+
+
+
+
 int clamp(int i, int maxi){
 	if(i<1)return 1;
 	if(i>maxi)return maxi;
