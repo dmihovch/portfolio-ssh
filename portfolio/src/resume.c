@@ -9,14 +9,10 @@ void drawEducation(WINDOW* win, int y, int x, int maxy, int maxx){
 
 	int scaled_x;
 
-	const char* edu_title = "Education:";
+	const char* edu_title = "Education";
 	mvwprintw(win,y,center_text(maxx/2, strlen(edu_title)),"%s",edu_title);
-
 	const char* edu_school = "University of Delaware";
 	mvwprintw(win,y+1, 1,"%s",edu_school);
-	WINDOW* subwin = derwin(win,10,10,10,10);
-	// touchwin(win);
-	box(subwin,0,0);
 	const char* edu_city = "Newark, DE";
 	mvwprintw(win, y+1, maxx - (strlen(edu_city)+1),"%s",edu_city);
 
@@ -42,7 +38,18 @@ void redrawResume(Page* resume){
 
 	const char* contact = "732-239-5689 | dmihovch@udel.edu | linkedin.com/in/danielmihovch | github.com/dmihovch";
 	mvwprintw(resume_win,1,center_text(maxx/2, strlen(contact)),"%s",contact);
-	
-	drawEducation(resume_win, 2, 0, maxy, maxx);
+
+	WINDOW* subwinl = derwin(resume_win,maxy/2,(maxx/2)-1,2,1);
+	touchwin(resume_win);
+	box(subwinl,0,0);
+	int y,x;
+	getmaxyx(subwinl,y,x);
+	drawEducation(subwinl, 2, 0, y, x);
+
+	WINDOW* subwinr = derwin(resume_win, maxy/2,(maxx/2)-1,2,(maxx/2));
+	touchwin(resume_win);
+	box(subwinr,0,0);
+	getmaxyx(subwinr,y,x);
+	drawEducation(subwinr, 2, 0, y, x);
 }
 
