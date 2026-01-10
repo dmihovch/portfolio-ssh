@@ -27,17 +27,18 @@ int main(int argc, char* argv[]){
 	printl("NEW RUN OF PROGRAM\n");
 	printl("MAX X %d\nMAX Y %d\n",maxx,maxy);
 
+
+	Resume* resume = initResume(maxy,maxx);
+	if(resume == NULL){
+		printl("resume == NULL");
+		goto cleanup;
+	} 
+
 	Home* home = initHome(maxy, maxx);
 	if(home == NULL) {
 		printl("home == NULL");
 		goto cleanup;
 	}
-	Resume* resume = initResume(maxy,maxx);
-
-	if(resume == NULL){
-		printl("resume == NULL");
-		goto cleanup;
-	} 
 
 	char curch = '1';
 	char ch;
@@ -54,12 +55,10 @@ int main(int argc, char* argv[]){
 			continue;
 		}
 		if(ch == '1' && ch != curch){
-			printl("in redrawHome logic\n");
 			curch = ch;
 			redrawHome(home, maxy, maxx);
 		} 
 		if(ch == '2' && ch != curch){
-			printl("in redrawResume logic\n");
 			curch = ch;
 			redrawResume(resume, maxy,maxx);
 		}
@@ -70,8 +69,6 @@ int main(int argc, char* argv[]){
 	
 
 cleanup:
-
-	printl("in cleanup\n");
 
 	freeResume(resume);
 	freeHome(home);

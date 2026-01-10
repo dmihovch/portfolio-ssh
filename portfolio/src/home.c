@@ -4,7 +4,8 @@
 Home* initHome(int maxy,int maxx){
 	Home* home = malloc(sizeof(Home));
 	if(home == NULL) return NULL;
-	home->win = stdscr;
+	home->win = newwin(0,0,0,0);
+	if(home->win == NULL) goto fail;
 	home->pan = new_panel(home->win);
 	if(home->pan == NULL) goto fail;
 
@@ -22,6 +23,7 @@ Home* initHome(int maxy,int maxx){
 void freeHome(Home* home){
 	if(home){
 		if(home->pan) del_panel(home->pan);
+		if(home->win) delwin(home->win);
 	}
 	free(home);
 }
