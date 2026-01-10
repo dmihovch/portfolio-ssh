@@ -34,6 +34,9 @@ void resetLightning(WINDOW* win, Lightning* bolts, int num_bolts){
 		bolts[i].x = bolts[i].startx;
 		bolts[i].y = bolts[i].starty;
 	}
+
+
+	box(win, 0,0);
 }
 
 

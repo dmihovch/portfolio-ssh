@@ -1,6 +1,19 @@
 NEW RUN OF PROGRAM
-MAX X 141
-MAX Y 32
-2
+MAX X 133
+MAX Y 30
+redrawing home, err = 0 
 1
+2
+in redrawResume logic
+1
+in redrawHome logic
+redrawing home, err = 0 
+2
+in redrawResume logic
+1
+in redrawHome logic
+redrawing home, err = 0 
+2
+in redrawResume logic
 q
+in cleanup

@@ -1,15 +1,13 @@
-#include "include/animations.h"
 #include <ncurses.h>
-#include <string.h>
 #include <panel.h>
-#include "include/page.h"
+#include <unistd.h>
+#include "include/home.h"
 #include "include/resume.h"
 #include "include/utils.h"
 #include "logs/logs.h"
 
 
 #define NUMBOLTS 5
-
 
 int main(int argc, char* argv[]){
 	initCurses();
@@ -23,111 +21,60 @@ int main(int argc, char* argv[]){
 
 	int miny = 0;
 	int minx = 0;
-	int maxy = getmaxy(stdscr)-2;
-	int maxx = getmaxx(stdscr)-2;
+	int maxy = getmaxy(stdscr);
+	int maxx = getmaxx(stdscr);
 
 	printl("NEW RUN OF PROGRAM\n");
 	printl("MAX X %d\nMAX Y %d\n",maxx,maxy);
-	
 
-	Lightning* bolts = malloc(NUMBOLTS*sizeof(Lightning));
-	if(bolts == NULL)return 1;
-
-	for(int i = 0; i<NUMBOLTS; i++){
-		bolts[i] = createLightning(10+i*20, miny);
+	Home* home = initHome(maxy, maxx);
+	if(home == NULL) {
+		printl("home == NULL");
+		goto cleanup;
 	}
+	Resume* resume = initResume(maxy,maxx);
 
-	const char* msg = "Daniel Mihovch";
-	int len = strlen(msg);
-	CycleLetter* str = createCycleString(msg, len, 10, 10,10);
-	if(str == NULL) return 1;
+	if(resume == NULL){
+		printl("resume == NULL");
+		goto cleanup;
+	} 
 
-
-	Page home;  
-	home.win = newwin(0,0,0,0);
-	home.pan = new_panel(home.win);
-	keypad(home.win, TRUE);
-	nodelay(home.win, TRUE);
-
-
-	Page resume; 
-	resume.win = newwin(0,0,0,0);
-	resume.pan = new_panel(resume.win);
-	keypad(resume.win, TRUE);
-	nodelay(resume.win, TRUE);
-
-	Page animations; 
-	animations.win = newwin(0,0,0,0);
-	animations.pan = new_panel(animations.win);
-	keypad(animations.win,TRUE);
-	nodelay(animations.win, TRUE);
-
-	box(home.win, 0, 0);
-	box(resume.win,0,0);
-	box(animations.win,0,0);
-
-	const char* home_msg = "Welcome to the Home Page";
-	int home_len = strlen(home_msg);
-	mvwprintw(home.win, 0,(maxx/2) - (home_len/2),"%s",home_msg);
-
-
-	Page pages[3] = {home,resume,animations};
-		
-	top_panel(home.pan);
-	int current_page_idx;
-	Page* current_page = &pages[0];
-
-	getmaxyx(current_page->win,y_termsize, x_termsize);
-	
 	char curch = '1';
+	char ch;
 	while(1){
-		getmaxyx(current_page->win,y_new_termsize,x_new_termsize);
-		if(x_new_termsize != x_termsize || y_new_termsize != y_termsize){
-			printl("y: %d x: %d\n", y_new_termsize,x_new_termsize);
-			x_termsize = x_new_termsize;
-			y_termsize = y_new_termsize;
-		}
 
-
-
-
-		char ch = wgetch(current_page->win);
+		if(curch == '1') ch = wgetch(home->win);
+		if(curch == '2') ch = wgetch(resume->win);
 		if(ch != ERR){
 			printl("%c\n",ch);
 		}
 		if(ch == 'q') break;
 		if(ch == (char)KEY_RESIZE) {
 			//handleResize will handle everything that needs to be done before next loop iteration
-			handleResize(pages, 3);
 			continue;
 		}
 		if(ch == '1' && ch != curch){
+			printl("in redrawHome logic\n");
 			curch = ch;
-			top_panel(home.pan);
-			current_page = &pages[0];
+			redrawHome(home, maxy, maxx);
 		} 
 		if(ch == '2' && ch != curch){
+			printl("in redrawResume logic\n");
 			curch = ch;
-			top_panel(resume.pan);
-			current_page = &pages[1];
-			redrawResume(&resume);
+			redrawResume(resume, maxy,maxx);
 		}
-		if(ch == '3' && ch != curch){
-			curch = ch;
-			top_panel(animations.pan);
-			resetLightning(animations.win, bolts, NUMBOLTS);
-			box(animations.win, 0,0);
-			current_page = &pages[2];
-		}
-
-		updateAllLightning(animations.win, bolts, NUMBOLTS, maxy, maxx);
-
-
-
 		update_panels();
 		doupdate();
 		usleep(50000);
 	}
+	
+
+cleanup:
+
+	printl("in cleanup\n");
+
+	freeResume(resume);
+	freeHome(home);
 
 	debug_close();
 	closeCurses();

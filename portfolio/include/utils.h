@@ -1,20 +1,12 @@
-
-
 #ifndef UTILS_H
 #define UTILS_H
 
-#include "page.h"
 #include <ncurses.h>
-#include "resume.h"
-
-
-void handleResize(Page* pages, int num_pages);
-
-
-
+#include "../logs/logs.h"
 
 int clamp(int, int);
 void initCurses();
 void closeCurses();
+void windowOptions(WINDOW* win);
 
 #endif
