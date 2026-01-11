@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-void redrawHome(View home, int maxy, int maxx);
+void redrawHome(View home, int maxy, int maxx, bool resize);
 
 
 #endif

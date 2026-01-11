@@ -1,9 +1,9 @@
 #include "../include/resume.h"
 
 
-void redrawResume(View resume, int maxy, int maxx){
+void redrawResume(View resume, int maxy, int maxx, bool resize){
 
-	if(resume.resize){
+	if(resize){
 		wclear(resume.win);
 		box(resume.win,0,0);
 	}

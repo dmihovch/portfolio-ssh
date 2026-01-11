@@ -25,29 +25,33 @@ int main(int argc, char* argv[]){
 
 	int curch = '1';
 	int ch;
+	redrawHome(pages[HOME], LINES, COLS, true);
+	redrawResume(pages[RESUME], LINES, COLS, true);
+	top_panel(pages[HOME].pan);
+	update_panels();
+	doupdate();
 	while(1){
 		ch = wgetch(stdscr);
 		if(ch != ERR) printl("%d\n",ch);
 		if(ch == 'q') break;
 		if(ch == KEY_RESIZE){
 			printl("%d %d\n",LINES,COLS);
-			for(int i = 0; i<npages; i++){
-				pages[i].resize = true;
-			}
-			continue;
+			redrawHome(pages[HOME],LINES,COLS,true);
+			redrawResume(pages[RESUME],LINES,COLS,true);
+			goto update;
 		}
 		if((ch == '1' && ch != curch)){
 			curch = ch;
 			top_panel(pages[HOME].pan);
-			redrawHome(pages[HOME], LINES, COLS);
-			pages[HOME].resize = false;
+			redrawHome(pages[HOME], LINES, COLS,false);
 		} 
 		if((ch == '2' && ch != curch)){
 			curch = ch;
 			top_panel(pages[RESUME].pan);
-			redrawResume(pages[RESUME], LINES,COLS);
-			pages[RESUME].resize = false;
+			redrawResume(pages[RESUME], LINES,COLS,false);
 		}
+
+update:
 		update_panels();
 		doupdate();
 		usleep(50000);

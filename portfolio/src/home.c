@@ -1,8 +1,8 @@
 #include "../include/home.h"
 
-void redrawHome(View home, int maxy, int maxx){
+void redrawHome(View home, int maxy, int maxx, bool resize){
 
-	if(home.resize){
+	if(resize){
 		wclear(home.win);
 		box(home.win, 0,0);
 	}

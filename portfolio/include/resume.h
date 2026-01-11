@@ -13,7 +13,7 @@
 
 
 
-void redrawResume(View resume,int maxy, int maxx);
+void redrawResume(View resume,int maxy, int maxx, bool resize);
 void drawEducation(WINDOW* win, int y, int x, int maxy, int maxx);
 void drawExperience(WINDOW* win, int y, int x, int maxy, int maxx);
 View initResume(int maxy, int maxx);
