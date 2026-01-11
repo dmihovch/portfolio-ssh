@@ -1,144 +1,60 @@
 NEW RUN OF PROGRAM
-MAX X 133
-MAX Y 30
-redrawing home, err = 0 
-2
-in redrawResume logic
-3
+MAX X 186
+MAX Y 41
 2
 1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-2
-2
 2
 1
-in redrawHome logic
-redrawing home, err = 0 
 2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-2
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-1
-in redrawHome logic
-redrawing home, err = 0 
-2
-in redrawResume logic
-2
-2
-2
-2
-1
-in redrawHome logic
-redrawing home, err = 0 
-1
-1
-1
+š
+old 45 old 186
+45 186
+š
+old 47 old 207
+47 207
+š
+old 49 old 233
+49 233
+š
+old 55 old 233
+55 233
+š
+old 58 old 266
+58 266
+š
+old 62 old 266
+62 266
+š
+old 71 old 311
+71 311
+š
+old 76 old 373
+76 373
+š
+old 71 old 311
+71 311
+š
+old 62 old 266
+62 266
+š
+old 58 old 266
+58 266
+š
+old 55 old 233
+55 233
+š
+old 49 old 233
+49 233
+š
+old 47 old 207
+47 207
+š
+old 45 old 186
+45 186
+š
+old 41 old 186
+41 186
+š
+old 39 old 169
+39 169
 q
-in cleanup

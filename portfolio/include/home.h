@@ -6,17 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-typedef struct {
-	WINDOW* win;
-	PANEL* pan;
-} Home;
-
-//incase add more subwins and such i suppose
-Home* initHome(int maxy, int maxx);
-void freeHome(Home* home);
-void redrawHome(Home*, int maxy, int maxx);
-
-
+void redrawHome(View home, int maxy, int maxx);
 
 
 #endif

@@ -6,13 +6,14 @@
 #include "include/utils.h"
 #include "logs/logs.h"
 
+#define HOME 0
+#define RESUME 1
 
-#define NUMBOLTS 5
 
 int main(int argc, char* argv[]){
 	initCurses();
 	debug_init();
-	
+	int exit_code = 0;	
 
 	int x_termsize;
 	int y_termsize;
@@ -26,54 +27,46 @@ int main(int argc, char* argv[]){
 
 	printl("NEW RUN OF PROGRAM\n");
 	printl("MAX X %d\nMAX Y %d\n",maxx,maxy);
-
-
-	Resume* resume = initResume(maxy,maxx);
-	if(resume == NULL){
-		printl("resume == NULL");
-		goto cleanup;
-	} 
-
-	Home* home = initHome(maxy, maxx);
-	if(home == NULL) {
-		printl("home == NULL");
-		goto cleanup;
-	}
+	
+	int npages = 2;
+	View pages[npages];  
+	pages[HOME] = newView(LINES, COLS, 0, 0);
+	pages[RESUME] = newView(LINES,COLS,0,0);
 
 	char curch = '1';
 	char ch;
 	while(1){
-
-		if(curch == '1') ch = wgetch(home->win);
-		if(curch == '2') ch = wgetch(resume->win);
-		if(ch != ERR){
-			printl("%c\n",ch);
-		}
+		//need to transition to just windows
+		ch = wgetch(stdscr);
+		if(ch != ERR) printl("%c\n",ch);
 		if(ch == 'q') break;
-		if(ch == (char)KEY_RESIZE) {
-			//handleResize will handle everything that needs to be done before next loop iteration
+
+		if(ch == (char)KEY_RESIZE){
+			printl("old %d old %d\n",LINES,COLS);
+			resizeterm(0, 0);
+			printl("%d %d\n",LINES,COLS);
+			handleResize(pages, npages);
+			redrawHome(pages[HOME],LINES,COLS);
+			redrawResume(pages[RESUME],LINES,COLS);
 			continue;
 		}
-		if(ch == '1' && ch != curch){
+		if((ch == '1' && ch != curch)){
 			curch = ch;
-			redrawHome(home, maxy, maxx);
+			top_panel(pages[HOME].pan);
+			redrawHome(pages[HOME], maxy, maxx);
 		} 
-		if(ch == '2' && ch != curch){
+		if((ch == '2' && ch != curch)){
 			curch = ch;
-			redrawResume(resume, maxy,maxx);
+			top_panel(pages[RESUME].pan);
+			redrawResume(pages[RESUME], maxy,maxx);
 		}
 		update_panels();
 		doupdate();
 		usleep(50000);
 	}
-	
-
 cleanup:
-
-	freeResume(resume);
-	freeHome(home);
 
 	debug_close();
 	closeCurses();
-	return 0;
+	return exit_code;
 }
