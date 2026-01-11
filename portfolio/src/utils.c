@@ -39,6 +39,7 @@ View newView(int nlines, int ncols, int begin_y, int begin_x){
 		return (View){0};
 	} 
 	v.ok = true;
+	v.resize = true; 
 	return v;
 }
 

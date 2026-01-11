@@ -3,18 +3,18 @@
 
 void redrawResume(View resume, int maxy, int maxx){
 
+	if(resume.resize){
+		wclear(resume.win);
+		box(resume.win,0,0);
+	}
+
 	const char* name = "Daniel Mihovch";
 	mvwprintw(resume.win,0,center_text(maxx/2,strlen(name) ),"%s",name);
 	//I think I should stop using center_text
 	const char* contact = "732-239-5689 | dmihovch@udel.edu | linkedin.com/in/danielmihovch | github.com/dmihovch";
 	mvwprintw(resume.win,1,center_text(maxx/2, strlen(contact)),"%s",contact);
-	int y,x;
-	getmaxyx(resume.win,y,x);
-	drawEducation(resume.win,2, 0, y, x);
-
-	getmaxyx(resume.win,y,x);
+	drawEducation(resume.win,2, 0, maxy,maxx);
 	drawExperience(resume.win, 2, 0, maxy, maxx);
-
 	return;
 }
 

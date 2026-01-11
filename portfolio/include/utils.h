@@ -9,6 +9,7 @@ typedef struct {
 	WINDOW* win;
 	PANEL* pan;
 	bool ok;
+	bool resize;
 } View;
 
 int clamp(int, int);

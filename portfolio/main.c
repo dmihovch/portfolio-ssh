@@ -15,50 +15,38 @@ int main(int argc, char* argv[]){
 	debug_init();
 	int exit_code = 0;	
 
-	int x_termsize;
-	int y_termsize;
-	int x_new_termsize;
-	int y_new_termsize;
-
-	int miny = 0;
-	int minx = 0;
-	int maxy = getmaxy(stdscr);
-	int maxx = getmaxx(stdscr);
-
 	printl("NEW RUN OF PROGRAM\n");
-	printl("MAX X %d\nMAX Y %d\n",maxx,maxy);
+	printl("MAX X %d\nMAX Y %d\n",LINES,COLS);
 	
 	int npages = 2;
 	View pages[npages];  
-	pages[HOME] = newView(LINES, COLS, 0, 0);
+	pages[HOME] = newView(LINES,COLS,0,0);
 	pages[RESUME] = newView(LINES,COLS,0,0);
 
-	char curch = '1';
-	char ch;
+	int curch = '1';
+	int ch;
 	while(1){
-		//need to transition to just windows
 		ch = wgetch(stdscr);
-		if(ch != ERR) printl("%c\n",ch);
+		if(ch != ERR) printl("%d\n",ch);
 		if(ch == 'q') break;
-
-		if(ch == (char)KEY_RESIZE){
-			printl("old %d old %d\n",LINES,COLS);
-			resizeterm(0, 0);
+		if(ch == KEY_RESIZE){
 			printl("%d %d\n",LINES,COLS);
-			handleResize(pages, npages);
-			redrawHome(pages[HOME],LINES,COLS);
-			redrawResume(pages[RESUME],LINES,COLS);
+			for(int i = 0; i<npages; i++){
+				pages[i].resize = true;
+			}
 			continue;
 		}
 		if((ch == '1' && ch != curch)){
 			curch = ch;
 			top_panel(pages[HOME].pan);
-			redrawHome(pages[HOME], maxy, maxx);
+			redrawHome(pages[HOME], LINES, COLS);
+			pages[HOME].resize = false;
 		} 
 		if((ch == '2' && ch != curch)){
 			curch = ch;
 			top_panel(pages[RESUME].pan);
-			redrawResume(pages[RESUME], maxy,maxx);
+			redrawResume(pages[RESUME], LINES,COLS);
+			pages[RESUME].resize = false;
 		}
 		update_panels();
 		doupdate();
